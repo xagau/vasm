@@ -25,9 +25,9 @@ The sample program that comes with it,
 
 ```
 DECLARE Y INTEGER
-LABEL begin
 DECLARE X STRING
 SET X "COUNTING:"
+LABEL begin
 ADD Y 1
 PRINT X
 PRINT Y
