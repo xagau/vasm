@@ -130,6 +130,14 @@ public class Vasm {
         }
 
     }
+
+    public static void print(Program p)
+    {
+        ArrayList set = (ArrayList)p.instructionSet;
+        for(int i = 0; i < set.size(); i++ ) {
+            System.out.println(set.get(i));
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -140,6 +148,8 @@ public class Vasm {
             Loader loader = new Loader(new File("./file.vasm"));
 
             Program p = loader.compile();
+
+            print(p);
 
             Vasm v = new Vasm();
             v.execute(p);

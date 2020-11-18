@@ -5,6 +5,10 @@ class Instruction {
 
     }
 
+    public String toString(){
+        return "index:" + index + " Command:" + command.toString() + " operand left:" + opl + " operand right:" + opr;
+    }
+
     public Instruction(int index, Command c, String opl, String opr) {
         setCommand(c);
         this.opl = opl;
@@ -22,9 +26,69 @@ class Instruction {
         String split[] = line.split(" ");
         Instruction ret = new Instruction();
 
+        if( line.indexOf("\"") == -1 ){
+            // No Strings. Easy Peasy.
+            try {
+                String val = split[0];
+                ret.setCommand(Command.valueOf(val));
+            } catch(Exception ex) { }
+
+            try {
+                String val = split[1];
+                ret.setOpl(val);
+            } catch(Exception ex) { }
+            try {
+                String val = split[2];
+                ret.setOpr(val);
+            } catch(Exception ex) {
+                ret.setOpr(null);
+            }
+
+            return ret;
+        }
+
+
+        // Not so easy.
+
+        //System.out.println("Parse:" + line);
         Command c = Command.valueOf(split[0]);
-        try { ret.setOpl(split[1]); } catch(Exception ex) { }
-        try { ret.setOpr(split[2]); } catch(Exception ex) { }
+        int j = 1;
+        try {
+            if( split[1].indexOf("\"") != -1) {
+                int idx = line.indexOf(" ");
+                String val = line.substring(idx, line.length());
+                for(int i = 0; i < val.length(); i++ ){
+                    if( val.charAt(i) == ' '){
+                        j++;
+                    }
+                }
+                val = val.trim();
+                ret.setCommand(c);
+                ret.setOpl(val);
+                ret.setOpr(null);
+                return ret;
+            }
+            else {
+                ret.setCommand(c);
+                ret.setOpl(split[1]);
+                j = 1;
+            }
+        } catch(Exception ex) { }
+        try {
+            String val = split[j+1];
+
+            if( val.startsWith("\"")){
+                int index = line.indexOf("\"");
+                for(int i = index; i < line.length(); i++ ) {
+                    val += line.charAt(i);
+                    if( line.charAt(i) == '\"' ){
+                        break;
+                    }
+                }
+            }
+
+            ret.setOpr(val);
+        } catch(Exception ex) { ret.setOpr(null); }
         ret.setCommand(c);
         return ret;
     }

@@ -19,7 +19,7 @@ Make sure file.vasm (your program) and Vasm are in the same directory. You can d
 PRINT "HelloWorld"
 ```
 
-Note - this is only a toy and has lots of issues with it. I wouldn't use it without further modication as it has problems with the strings, among other things. It is basically incompete. I just wrote this for an exercise. I have a couple of ideas that could make it useful one day. It is not really suitable for anything except playing around.
+Note - this is only a toy and has lots of issues with it. I wouldn't use it without further modification as it has problems with the strings, among other things. It is basically incompete. I just wrote this for an exercise. I have a couple of ideas that could make it useful one day. It is not really suitable for anything except playing around.
 
 The sample program that comes with it, 
 
